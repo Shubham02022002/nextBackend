@@ -23,7 +23,35 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="flex flex-col">
+        {/* <NavBar /> */}
+        {children}
+      </body>
     </html>
+  );
+}
+
+function NavBar() {
+  return (
+    <div>
+      <nav className="bg-black text-slate-400">
+        <div className="flex items-center justify-between p-5">
+          <div>Linear</div>
+          <div className="space-x-5 hover:cursor-pointer">
+            <span>Product</span>
+            <span>Resouces</span>
+            <span>Customer</span>
+            <span>Pricing</span>
+            <span>Now</span>
+            <span>Contact</span>
+            <span>|</span>
+            <span>Login</span>
+            <span className="rounded-full border-white bg-white text-black">
+              Signup
+            </span>
+          </div>
+        </div>
+      </nav>
+    </div>
   );
 }
