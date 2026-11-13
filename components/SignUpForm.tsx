@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useState } from "react";
 
@@ -8,6 +9,7 @@ export default function SignUpForm() {
   const [lastName, setLastName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const router = useRouter();
 
   return (
     <div className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.10)] sm:p-8">
@@ -25,16 +27,17 @@ export default function SignUpForm() {
 
       <form
         className="space-y-4"
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
           try {
-            const response = axios.post("http://localhost:3000/api/user", {
+            await axios.post("http://localhost:3000/api/user", {
               firstName,
               lastName,
               email,
               password,
             });
-            
+            // const users = await
+            router.push("/");
           } catch (error) {}
         }}
       >
