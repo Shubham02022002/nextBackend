@@ -1,7 +1,7 @@
 import { orm } from "@/prisma/db";
 import { UserSignUpSchema } from "@/types";
 import { NextRequest, NextResponse } from "next/server";
-import z, { email, object } from "zod";
+import z from "zod";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
