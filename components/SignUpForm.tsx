@@ -30,7 +30,7 @@ export default function SignUpForm() {
         onSubmit={async (e) => {
           e.preventDefault();
           try {
-            await axios.post("http://localhost:3000/api/user", {
+            await axios.post("http://localhost:3000/api/user/signup", {
               firstName,
               lastName,
               email,

@@ -20,6 +20,6 @@ export default async function Home() {
 
 async function getUsersDetails(): Promise<User> {
   await new Promise((r) => setTimeout(r, 3000));
-  const response = await axios.get<User>("http://localhost:3000/api/user");
+  const response = await axios.get<User>("http://localhost:3000/api/user/signup");
   return response.data;
 }

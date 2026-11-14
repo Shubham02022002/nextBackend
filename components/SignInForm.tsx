@@ -1,10 +1,14 @@
 "use client";
 
+import axios from "axios";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function SignInForm() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
+  const router = useRouter();
   return (
     <div className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.10)] sm:p-8">
       <div className="mb-2 flex items-center justify-between gap-3">
@@ -19,10 +23,35 @@ export default function SignInForm() {
         className="space-y-4"
         onSubmit={async (e) => {
           e.preventDefault();
-
+          setError("");
+          try {
+            const response = await axios.post(
+              "http://localhost:3000/api/user/signin",
+              {
+                email,
+                password,
+              },
+            );
+            const data = response.data;
+            if (!data) {
+              setError("Invalid email or password.");
+            } else {
+              router.push("/");
+            }
+          } catch {
+            setError(
+              "Unable to sign in. Please check your credentials and try again.",
+            );
+          }
         }}
       >
         <div className="grid gap-4 sm:grid-cols-2"></div>
+
+        {error && (
+          <p role="alert" className="text-sm text-red-600">
+            {error}
+          </p>
+        )}
 
         <label className="block text-left text-sm font-medium text-slate-700">
           Email
